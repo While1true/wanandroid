@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/src/scheduler/ticker.dart';
 import 'package:flutter/widgets.dart';
 
 class MyProgress extends StatefulWidget {
@@ -17,7 +18,7 @@ class MyProgress extends StatefulWidget {
 
 }
 
-class _ProgressState extends State<MyProgress> with TickerProviderStateMixin {
+class _ProgressState extends State<MyProgress> implements TickerProvider {
 
   List<Animation<double>>animators = [];
   List<AnimationController>_animationControllers = [];
@@ -69,9 +70,12 @@ class _ProgressState extends State<MyProgress> with TickerProviderStateMixin {
   void dispose() {
     super.dispose();
     animators[0].removeListener(_change);
-    for (AnimationController _animationController in _animationControllers) {
-      _animationController.dispose();
-    }
+    _animationControllers[0].dispose();
+  }
+
+  @override
+  Ticker createTicker(TickerCallback onTick) {
+    return Ticker(onTick);
   }
 }
 

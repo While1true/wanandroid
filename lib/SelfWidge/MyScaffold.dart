@@ -25,7 +25,8 @@ class MaterialScaffod extends StatefulWidget {
 
   const MaterialScaffod(
       {this.appBar, this.iconSize = 24.0, this.materialScaffodType = MaterialScaffodType
-          .STACK, this.index, this.onIndexChanged, @required this.childrenContent, @required this.itembars ,this.key}):super(key:key);
+          .STACK, this.index, this.onIndexChanged, @required this.childrenContent, @required this.itembars, this.key})
+      :super(key: key);
 
 
   @override
@@ -85,7 +86,7 @@ class _MaterialScaffodStack extends State<MaterialScaffod> {
               });
             },
             type: BottomNavigationBarType.fixed),
-        body: IndexedStack(key: GlobalKey(),
+        body: IndexedStack(
           index: _index, children: widget.childrenContent,));
   }
 
@@ -146,7 +147,7 @@ class _MaterialIndicateState extends State<MaterialScaffod>
   }
 
   void call() {
-    if(widget.onIndexChanged!=null){
+    if (widget.onIndexChanged != null) {
       widget.onIndexChanged(_tabController.index);
     }
   }
@@ -157,7 +158,8 @@ class _MaterialIndicateState extends State<MaterialScaffod>
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        TabBar(indicatorSize: TabBarIndicatorSize.label,
+        TabBar(
+          indicatorSize: TabBarIndicatorSize.label,
           isScrollable: true,
           tabs: widget.itembars,
           labelColor: Theme

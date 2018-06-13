@@ -3,7 +3,7 @@ class Artical {
   final String author;
   final int chapterId;
   final String chapterName;
-  final bool collect;
+   bool collect;
   final int courseId;
   final String desc;
   final bool fresh;
@@ -20,13 +20,14 @@ class Artical {
   final int superChapterId;
   final String superChapterName;
   final String title;
+  final String envelopePic;
   final List<Tag> tags;
 
   Artical({this.apkLink, this.author, this.chapterId,
     this.chapterName, this.collect, this.courseId, this.desc, this.fresh,
     this.id, this.type, this.userId, this.visible, this.zan, this.link, this.niceDate, this.origin,
     this.projectLink, this.publishTime, this.superChapterId
-    , this.superChapterName, this.title, this.tags});
+    , this.superChapterName, this.title,this.envelopePic, this.tags});
 
   Artical.fromJson(Map<String, dynamic> json)
       :
@@ -38,6 +39,7 @@ class Artical {
         courseId=json['courseId'],
         desc=json['desc'],
         fresh=json['fresh'],
+        envelopePic=json['envelopePic'],
         id=json['id'],
         type=json['type'],
         userId=json['userId'],

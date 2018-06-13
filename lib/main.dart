@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flyandroid/SelfWidge/MyScaffold.dart';
-import 'package:flyandroid/HomePage.dart';
-import 'package:flyandroid/GuidePage.dart';
-import 'package:flyandroid/CategoryPage.dart';
-import 'package:flyandroid/MinePage.dart';
-import 'package:flyandroid/SearchPage.dart';
+import 'package:flyandroid/Pages/HomePage.dart';
+import 'package:flyandroid/Pages/GuidePage.dart';
+import 'package:flyandroid/Pages/CategoryPage.dart';
+import 'package:flyandroid/Pages/MinePage.dart';
+import 'package:flyandroid/Pages/SearchPage.dart';
+import 'package:flyandroid/Pages/WebPage.dart';
 
 void main() => runApp(new MyApp());
 
@@ -19,7 +20,6 @@ class MyApp extends StatelessWidget {
       ),
       home: new MyHomePage(),
       routes: <String, WidgetBuilder>{
-        '/search': (BuildContext context) => new SearchPage(),
       },
     );
   }

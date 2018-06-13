@@ -506,10 +506,10 @@ class RefreshLayoutState extends State<RefreshLayout>
                       gradient: new LinearGradient(begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: <Color>[
-                            Color(0x40ffffff),
-                            Color(0x99ffffff),
-                            Color(0xBBffffff),
+                            Color(0xCCffffff),
                             Color(0xDDffffff),
+                            Color(0xEEffffff),
+                            Color(0xFFffffff),
                             Colors.white
                           ])),
                     child: SizedBox(height: 60.0,
