@@ -56,6 +56,8 @@ class Artical {
         tags=getTag(json['tags']);
 
   static List<Tag> getTag(List<dynamic> tags) {
+    if(tags==null)
+      return [];
     return tags.map((tag) => Tag((tag as Map<String, dynamic>)['name'], (tag as Map<String, dynamic>)['url'])).toList();
   }
 }
