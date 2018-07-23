@@ -19,7 +19,7 @@ class _GuidePageState extends State<GuidePage> {
   Widget build(BuildContext context) {
     if (_showloading)
       return Center(
-        child: LinearProgressIndicator(),
+        child: SizedBox(height: 4.0,child:Theme(data: ThemeData(accentColor: Colors.amber), child: LinearProgressIndicator()),),
       );
     return SingleChildScrollView(
       child: Wrap(
@@ -52,10 +52,10 @@ class _GuidePageState extends State<GuidePage> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _request();
+  void didUpdateWidget(GuidePage oldWidget) {
+    if(guideData==null){
+      _request();
+    }
   }
 
   Future<Null> _request() async {
