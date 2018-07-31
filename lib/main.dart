@@ -4,8 +4,7 @@ import 'package:flyandroid/Pages/HomePage.dart';
 import 'package:flyandroid/Pages/GuidePage.dart';
 import 'package:flyandroid/Pages/CategoryPage.dart';
 import 'package:flyandroid/Pages/MinePage.dart';
-import 'package:flyandroid/Pages/SearchPage.dart';
-import 'package:flyandroid/Pages/WebPage.dart';
+import 'package:flyandroid/Api/Constant.dart';
 
 void main() => runApp(new MyApp());
 
@@ -73,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
       onIndexChanged: (index) {
         setState(() {
+          Constanct.SELECT_PAGER=index;
           this._index = index;
         });
       },
