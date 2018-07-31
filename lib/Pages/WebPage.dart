@@ -46,6 +46,7 @@ class _WebState extends State<MyWebPage> {
           ),
           withJavascript: true,
           withLocalStorage: true,
+          withZoom: true,
         ),
         Offstage(
           offstage: !isloading,
