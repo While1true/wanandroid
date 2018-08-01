@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
     <CLASSES>
-      <root url="file://F:/flutter/.pub-cache/hosted/dart-pub.mirrors.sjtug.sjtu.edu.cn%47/shared_preferences-0.4.2" />
-      <root url="file://F:/flutter/.pub-cache/hosted/dart-pub.mirrors.sjtug.sjtu.edu.cn%47/flutter_webview_plugin-0.1.6" />
+      <root url="file://F:/flutter/.pub-cache/hosted/dart-pub.mirrors.sjtug.sjtu.edu.cn/shared_preferences-0.4.2" />
+      <root url="file://F:/flutter/.pub-cache/hosted/dart-pub.mirrors.sjtug.sjtu.edu.cn/flutter_webview_plugin-0.1.6" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

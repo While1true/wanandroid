@@ -69,6 +69,9 @@ class _CategoryPageState extends State<CategoryPage> {
     }
   }
 
+  /**
+   * 构建分类
+   */
   Widget _buildFirst(BuildContext context, int index) {
     Tree tree = treeBean.data[index];
     return InkResponse(
@@ -92,6 +95,9 @@ class _CategoryPageState extends State<CategoryPage> {
     );
   }
 
+  /**
+   * 构建子分类
+   */
   List<Widget> _buildSecond() {
     List<Widget> widgets = [];
     Tree tree = treeBean.data[_selectIndex];
@@ -120,6 +126,9 @@ class _CategoryPageState extends State<CategoryPage> {
     return widgets;
   }
 
+  /**
+   * 构建文章列表
+   */
   Widget _buildThird(BuildContext context, int index) {
     if (index == 0) return Wrap(children: _buildSecond());
 
