@@ -14,4 +14,19 @@ class Api{
   static const String LOGIN="http://www.wanandroid.com/user/login";
 
   static const String REGIDTER="http://www.wanandroid.com/user/register";
+
+
+  static String getUncollectUrl(int id){
+    return "http://www.wanandroid.com/lg/uncollect_originId/$id/json";
+  }
+
+  /**
+   * 我的收藏页
+   */
+  static String getUncollectContainSelfUrl(int id){
+    return "http://www.wanandroid.com/lg/uncollect/$id/json";
+  }
+  static String getCollectUrl(int id){
+    return "http://www.wanandroid.com/lg/collect/$id/json";
+  }
 }
