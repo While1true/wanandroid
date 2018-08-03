@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flyandroid/Model/Artical.dart';
 import 'package:flyandroid/Model/HomeModel.dart';
 import 'package:flyandroid/Pages/Item/ArticalItem.dart';
+import 'package:flyandroid/Utils/CookieUtil.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flyandroid/Api/Api.dart';
@@ -172,7 +173,7 @@ class _CategoryPageState extends State<CategoryPage> {
       page += 1;
     }
     http.Response response =
-        await http.get(Api.getTreeArtical(page, _child.id));
+        await http.get(Api.getTreeArtical(page, _child.id),headers: await CookieUtil.getCookie());
     var homeData = HomeData.fromJson(json.decode(response.body));
     if (homeData.errorCode < 0) {
       //TODO

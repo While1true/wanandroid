@@ -151,6 +151,7 @@ class _state extends State<LoginAndRegisterPage>{
       } else {
         SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
+        sharedPreferences.setString("cookie", response.headers['set-cookie']);
         sharedPreferences.setString("user", response.body);
         await  _showMessage("登录成功");
         Navigator.pop(context);
@@ -177,6 +178,7 @@ class _state extends State<LoginAndRegisterPage>{
           SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
           sharedPreferences.setString("user", response.body);
+          sharedPreferences.setString("cookie", response.headers['set-cookie']);
           await _showMessage("注册成功");
           Navigator.pop(context, true);
         }

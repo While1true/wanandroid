@@ -8,8 +8,11 @@ import 'package:flyandroid/SelfWidge/Refresh.dart';
 import 'package:flyandroid/Pages/Item/ArticalItem.dart';
 import 'package:flyandroid/Pages/WebPage.dart';
 import 'package:flyandroid/SelfWidge/carousel_slider.dart';
+import 'package:flyandroid/Utils/CookieUtil.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -72,7 +75,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<Null> _request(int page) async {
-    http.Response response = await http.get(Api.getHomePageUrl(_page));
+
+    http.Response response = await http.get(Api.getHomePageUrl(_page),headers:await CookieUtil.getCookie());
     http.Response bannerResponse = await http.get(Api.BANNER);
     _banner = BannerData.fromJson(json.decode(bannerResponse.body));
     var homeData = HomeData.fromJson(json.decode(response.body));
