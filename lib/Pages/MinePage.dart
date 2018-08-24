@@ -22,9 +22,16 @@ class MinePage extends StatefulWidget {
 class _MinePageState extends State<MinePage> {
   List<Artical> _articals = [];
   UserModel model;
-  ShowState showState = ShowState.LOADING;
+  ShowState showState;
   int _page = 0;
   bool _isnomore = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    showState = ShowState.LOGIN;
+  }
 
   @override
   void didUpdateWidget(MinePage oldWidget) {
@@ -38,28 +45,21 @@ class _MinePageState extends State<MinePage> {
   @override
   Widget build(BuildContext context) {
     switch (showState) {
-      case ShowState.LOADING:
-        return Center(
-          child: SizedBox(
-            height: 4.0,
-            child: Theme(
-                data: ThemeData(accentColor: Colors.amber),
-                child: LinearProgressIndicator()),
-          ),
-        );
       case ShowState.LOGIN:
-        return new InkWell(
-          child: Padding(padding: EdgeInsets.all(20.0), child: Text("点击登录！")),
-          onTap: () async {
-            var result = await Navigator
-                .of(context)
-                .push(MaterialPageRoute(builder: (c) {
-              return LoginAndRegisterPage(LoginAndRegister.LOGIN);
-            }));
-            if (result) {
-              asyncInit();
-            }
-          },
+        return Center(
+          child: new InkWell(
+            child: Padding(padding: EdgeInsets.all(50.0), child: Text("点击登录！")),
+            onTap: () async {
+              var result = await Navigator
+                  .of(context)
+                  .push(MaterialPageRoute(builder: (c) {
+                return LoginAndRegisterPage(LoginAndRegister.LOGIN);
+              }));
+              if (result) {
+                asyncInit();
+              }
+            },
+          ),
         );
       default:
         return RefreshLayout(
@@ -109,11 +109,7 @@ class _MinePageState extends State<MinePage> {
   void asyncInit() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var user = sharedPreferences.getString("user");
-    if (user == null) {
-      setState(() {
-        showState == ShowState.LOGIN;
-      });
-    } else {
+    if (user != null) {
       model = UserModel.fromJson(json.decode(user));
       doLoading();
     }
@@ -143,4 +139,4 @@ class _MinePageState extends State<MinePage> {
   }
 }
 
-enum ShowState { LOADING, LOGIN, CONTENT }
+enum ShowState { LOGIN, CONTENT }

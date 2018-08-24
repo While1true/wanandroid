@@ -21,7 +21,7 @@ class _GuidePageState extends State<GuidePage> {
   Widget build(BuildContext context) {
     if (_showloading)
       return Center(
-        child: SizedBox(height: 4.0,child:Theme(data: ThemeData(accentColor: Colors.amber), child: LinearProgressIndicator()),),
+        child: SizedBox(height: 8.0,child:Theme(data: ThemeData(accentColor: Colors.amber), child: CircularProgressIndicator()),),
       );
     return Row(crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

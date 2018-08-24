@@ -39,10 +39,10 @@ class _HomePageState extends State<HomePage> {
       case ShowState.LOADING:
         return Center(
           child: SizedBox(
-            height: 4.0,
+            height: 8.0,
             child: Theme(
                 data: ThemeData(accentColor: Colors.amber),
-                child: LinearProgressIndicator()),
+                child: CircularProgressIndicator()),
           ),
         );
       case ShowState.EMPTY:

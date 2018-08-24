@@ -31,10 +31,10 @@ class _CategoryPageState extends State<CategoryPage> {
     if (_showloading)
       return Center(
         child: SizedBox(
-          height: 4.0,
+          height: 8.0,
           child: Theme(
               data: ThemeData(accentColor: Colors.amber),
-              child: LinearProgressIndicator()),
+              child: CircularProgressIndicator()),
         ),
       );
     return Row(
