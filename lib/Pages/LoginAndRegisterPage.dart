@@ -76,7 +76,7 @@ class _state extends State<LoginAndRegisterPage>{
               return LoginAndRegisterPage(LoginAndRegister.REGISTER);
             }));
             if (isok) {
-              Navigator.pop(context);
+              Navigator.pop(context,true);
             }
           },
           child: Padding(
@@ -154,7 +154,7 @@ class _state extends State<LoginAndRegisterPage>{
         sharedPreferences.setString("cookie", response.headers['set-cookie']);
         sharedPreferences.setString("user", response.body);
         await  _showMessage("登录成功");
-        Navigator.pop(context);
+        Navigator.pop(context,true);
       }
     } else {
       await _showMessage("账号或密码不能为空");

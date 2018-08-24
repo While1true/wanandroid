@@ -1,7 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flyandroid/Model/Artical.dart';
-import 'package:flyandroid/Pages/WebPage.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flyandroid/Api/Api.dart';
+import 'package:flyandroid/Model/Artical.dart';
+import 'package:flyandroid/Pages/LoginAndRegisterPage.dart';
+import 'package:flyandroid/Pages/WebPage.dart';
+import 'package:flyandroid/Utils/CookieUtil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 class ArticalItem extends StatefulWidget {
   final Artical artical;
 
@@ -111,7 +117,7 @@ class ArticalState extends State<ArticalItem> {
         style: TextStyle(fontSize: 13.0, color: Colors.grey)));
     widges.add(GestureDetector(
       child: Text(
-        widget.artical.superChapterName,
+        widget.artical.superChapterName??"",
         style: TextStyle(
             color: Colors.blueGrey,
             fontStyle: FontStyle.italic,
@@ -121,7 +127,7 @@ class ArticalState extends State<ArticalItem> {
     ));
 
     widges.add(GestureDetector(
-      child: Text(widget.artical.chapterName,
+      child: Text(widget.artical.chapterName??"",
           style: TextStyle(
               color: Colors.blueGrey,
               fontStyle: FontStyle.italic,
@@ -155,10 +161,36 @@ class ArticalState extends State<ArticalItem> {
 
   void _onClickTag(Tag tag) {}
 
-  void _collect() {
-    print('collect');
-    setState(() {
-      widget.artical.collect = !widget.artical.collect;
-    });
+  void _collect() async {
+    SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    String cookie=sharedPreferences.getString("cookie");
+    if(cookie==null){
+      Navigator.of(context).push(MaterialPageRoute(builder: (c) {
+        return LoginAndRegisterPage(LoginAndRegister.LOGIN);
+      }));
+    }else {
+      if(widget.artical.collect){
+        http.Response response = await http.post(Api.getUncollectUrl(widget.artical.id),headers:await CookieUtil.getCookie());
+        handleCollectResult(response);
+      }else{
+        http.Response response = await http.post(Api.getCollectUrl(widget.artical.id),headers:await CookieUtil.getCookie());
+        handleCollectResult(response);
+      }
+
+    }
+  }
+
+  void handleCollectResult(http.Response response) {
+    Map<String,dynamic> result=json.decode(response.body);
+    if(result['errorCode']>=0){
+         setState(() {
+           widget.artical.collect=!widget.artical.collect;
+         });
+    }else{
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(result['errorMsg']),
+      ));
+    }
   }
 }

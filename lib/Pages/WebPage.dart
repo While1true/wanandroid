@@ -21,6 +21,9 @@ class _WebState extends State<MyWebPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    flutterWebViewPlugin.onDestroy.listen((onDestroy){
+      Navigator.pop(context);
+    });
     flutterWebViewPlugin.onStateChanged.listen((state) {
       if (state.type == WebViewState.finishLoad&&isloading) {
         setState(() {

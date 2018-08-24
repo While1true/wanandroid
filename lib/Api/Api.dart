@@ -23,8 +23,8 @@ class Api{
   /**
    * 我的收藏页
    */
-  static String getUncollectContainSelfUrl(int id){
-    return "http://www.wanandroid.com/lg/uncollect/$id/json";
+  static String getCollectList(int page){
+    return "http://www.wanandroid.com/lg/collect/list/$page/json";
   }
   static String getCollectUrl(int id){
     return "http://www.wanandroid.com/lg/collect/$id/json";

@@ -35,6 +35,8 @@ const Duration _kIndicatorScaleDuration = const Duration(milliseconds: 200);
 /// Used by [RefreshLayout.onRefresh].
 typedef Future<Null> RefreshCallback(bool refresh);
 
+typedef LoadingWidgeBuilder(BuildContext context);
+
 // The state machine moves through these modes only when the scrollable
 // identified by scrollableKey has been scrolled to its min or max limit.
 enum _RefreshLayoutMode {
@@ -93,11 +95,13 @@ class RefreshLayout extends StatefulWidget {
     this.canloading: true,
     this.displacement: 20.0,
     @required this.onRefresh,
+    this.loadingBuilder,
     this.color,
     this.backgroundColor,
     this.notificationPredicate: defaultScrollNotificationPredicate,
   })
       : assert(child != null),
+        assert(onRefresh != null),
         assert(onRefresh != null),
         assert(notificationPredicate != null),
         super(key: key);
@@ -134,6 +138,8 @@ class RefreshLayout extends StatefulWidget {
   /// By default, checks whether `notification.depth == 0`. Set it to something
   /// else for more complicated layouts.
   final ScrollNotificationPredicate notificationPredicate;
+
+  final LoadingWidgeBuilder loadingBuilder;
 
   final bool canloading;
   final bool canrefresh;
@@ -193,6 +199,8 @@ class RefreshLayoutState extends State<RefreshLayout>
       begin: 1.0,
       end: 0.0,
     ).animate(_scaleController);
+
+    initBuilder();
   }
 
   @override
@@ -501,29 +509,9 @@ class RefreshLayoutState extends State<RefreshLayout>
               )
                   : null) : new AnimatedBuilder(
                 animation: _positionController,
-                builder: (BuildContext context, Widget child) {
-                  return new Container(decoration: new BoxDecoration(
-                      gradient: new LinearGradient(begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: <Color>[
-                            Color(0xCCffffff),
-                            Color(0xDDffffff),
-                            Color(0xEEffffff),
-                            Color(0xFFffffff),
-                            Colors.white
-                          ])),
-                    child: SizedBox(height: 60.0,
-                      child: Center(child: new Row(
-                        mainAxisSize: MainAxisSize.min, children: <Widget>[
-                        new SizedBox(width: 16.0,
-                          height: 16.0,
-                          child: CircularProgressIndicator(strokeWidth: 1.3,
-                            valueColor: _valueColor,
-                            backgroundColor: widget.backgroundColor,),),
-                        Padding(padding: EdgeInsets.all(3.0)),
-                        Text('正在加载中...')
-                      ],)),),);
-                },
+                builder: widget.loadingBuilder==null?defaultLoadingBuilder:(context, widge){
+                  return widget.loadingBuilder(context);
+                }
               ),
             ),
           ),
@@ -531,4 +519,32 @@ class RefreshLayoutState extends State<RefreshLayout>
       ],
     );
   }
+
+  TransitionBuilder defaultLoadingBuilder;
+  void initBuilder() {
+    defaultLoadingBuilder = (BuildContext context, Widget cc) {
+      return new Container(decoration: new BoxDecoration(
+          gradient: new LinearGradient(begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[
+                Color(0x40ffffff),
+                Color(0x99ffffff),
+                Color(0xBBffffff),
+                Color(0xDDffffff),
+                Colors.white
+              ])),
+        child: SizedBox(height: 60.0,
+          child: Center(child: new Row(
+            mainAxisSize: MainAxisSize.min, children: <Widget>[
+            new SizedBox(width: 16.0,
+              height: 16.0,
+              child: CircularProgressIndicator(strokeWidth: 1.3,
+                valueColor: _valueColor,
+                backgroundColor: widget.backgroundColor,),),
+            Padding(padding: EdgeInsets.all(3.0)),
+            Text('正在加载中...')
+          ],)),),);
+    };
+  }
 }
+

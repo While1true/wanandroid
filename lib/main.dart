@@ -41,9 +41,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return MaterialScaffod(
       appBar: AppBar(title: Text(widget.titles[_index]),
-        actions: _index < 2 ? <Widget>[
+        /*actions: _index < 2 ? <Widget>[
           new FlatButton.icon(icon: Icon(Icons.search,color: Colors.white,),label: Text('搜索',style: TextStyle(color: Colors.white),), onPressed: _jumpSearch)
-        ] : null,),
+        ] : null,*/),
       materialScaffodType: MaterialScaffodType.STACK,
       childrenContent: <Widget>[
 
