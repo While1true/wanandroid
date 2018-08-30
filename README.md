@@ -1,6 +1,6 @@
 # flyandroid
 
-A Flutter application for Android tech.
+[APK下载](https://github.com/While1true/wanandroid/blob/master/app-release.apk)
 
 ## Getting Started
 
